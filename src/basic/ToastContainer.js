@@ -39,7 +39,8 @@ class ToastContainer extends Component {
       pan: new Animated.ValueXY({ x: 0, y: 0 }),
       keyboardHeight: 0,
       isKeyboardVisible: false,
-      modalVisible: false
+      modalVisible: false,
+      useNativeDriver: false
     };
 
     this.keyboardDidHide = this.keyboardDidHide.bind(this);
@@ -50,7 +51,8 @@ class ToastContainer extends Component {
         if (dx !== 0) {
           Animated.timing(this.state.pan, {
             toValue: { x: dx, y: 0 },
-            duration: 100
+            duration: 100,
+            useNativeDriver: false
           }).start(() => this.closeToast('swipe'));
         }
       }
@@ -147,7 +149,7 @@ class ToastContainer extends Component {
       useNativeDriver: false
     }).start();
   }
-  closeModal = (reason) => {
+  closeModal(reason) {
     this.setState({
       modalVisible: false
     });
